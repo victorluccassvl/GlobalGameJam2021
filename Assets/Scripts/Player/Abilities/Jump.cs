@@ -10,7 +10,7 @@ public class Jump : MonoBehaviour
     private float _jumpElapsedDelay = 0f;
 
     [SerializeField]
-    private float _force = 7f;
+    private float _speed = 7f;
 
     private void Awake()
     {
@@ -27,7 +27,7 @@ public class Jump : MonoBehaviour
 
     private void PerformJump()
     {
-        _player.Rigidbody.AddForce(Vector3.up * _force, ForceMode.Impulse);
+        _player.Rigidbody.AddForce(Vector3.up * _speed, ForceMode.VelocityChange);
         _jumpElapsedDelay = 0f;
     }
 }

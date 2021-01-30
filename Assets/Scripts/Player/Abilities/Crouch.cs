@@ -15,7 +15,6 @@ public class Crouch : MonoBehaviour
 
     private void PerformCrouch()
     {
-        _player.RunAnimation("Crouch");
     } 
 
     private void CancelCrouch()
