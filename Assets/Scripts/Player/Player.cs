@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
     private GroundDetector _groundDetector = null;
     private WallDetector _wallDetector = null;
     private Animator _animator = null;
+    private PlaySound _soundPlayer = null;
 
     [SerializeField]
     private Rigidbody _rigidbody = null;
@@ -48,10 +49,19 @@ public class Player : MonoBehaviour
 
         _animator = GetComponent<Animator>();
         Debug.Assert(_animator != null, "The player could not find it's animator");
+
+        _soundPlayer = GetComponent<PlaySound>();
+        Debug.Assert(_soundPlayer != null, "The player could not find it's sound player");
     }
 
     private void Update()
     {
         _animator.SetFloat("SidewaysSpeed", _rigidbody.velocity.x);
+        _animator.SetBool("IsTouchingGround", IsPlayerOnTheGround);
+    }
+
+    public void PlayPlayerSound(PlaySound.Audios audio)
+    {
+        _soundPlayer.PlaySpecificSound(audio);
     }
 }

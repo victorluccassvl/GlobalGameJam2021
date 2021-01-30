@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Player))]
 public class PickSoul : MonoBehaviour
 {
+    private Player _player = null;
     private Transform _pickedSoul = null;
 
     [SerializeField]
@@ -20,6 +22,11 @@ public class PickSoul : MonoBehaviour
         get => _pickedSoul != null;
     }
 
+    private void Awake()
+    {
+        _player = GetComponent<Player>();
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
@@ -32,6 +39,8 @@ public class PickSoul : MonoBehaviour
         {
             _pickedSoul = other.transform;
             _pickedSoul.parent = transform;
+            _player.PlayPlayerSound(PlaySound.Audios.PickSoul);
+
             if (_pickedSoul.position.x < transform.position.x)
                 _pickedSoul.localPosition = _orbitRadius * Vector3.left + _orbitCenterHeight * Vector3.up;
             else
@@ -51,6 +60,15 @@ public class PickSoul : MonoBehaviour
             newPosition.x = _pickedSoul.position.x;
             newPosition.y = transform.position.y + _orbitCenterHeight + _soulFluctuationAmplitude * Mathf.Sin(Time.time * _soulFluctuationRadialSpeed) / 2;
             newPosition.z = _pickedSoul.position.z;
+        }
+    }
+
+    public void DeliverSoul()
+    {
+        if (HasSoul)
+        {
+            Destroy(_pickedSoul.gameObject);
+            _pickedSoul = null;
         }
     }
 }
