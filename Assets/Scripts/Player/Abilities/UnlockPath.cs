@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class UnlockPath : MonoBehaviour
 {
@@ -15,10 +13,10 @@ public class UnlockPath : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "PathBlocker" && _soulPicker.HasSoul)
-            UnblockPath();
+            Unlock();
     }
 
-    private void UnblockPath()
+    private void Unlock()
     {
         //TODO
     }

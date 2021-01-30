@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PickSoul : MonoBehaviour
 {
+    private Transform _pickedSoul = null;
+
     [SerializeField]
     private float _soulRotationSpeed = 100f;
     [SerializeField]
@@ -14,8 +14,6 @@ public class PickSoul : MonoBehaviour
     private float _orbitCenterHeight = 1f;
     [SerializeField]
     private float _orbitRadius = 0.7f;
-
-    private Transform _pickedSoul = null;
 
     public bool HasSoul
     {
