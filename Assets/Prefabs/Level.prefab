@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 3149237608811016412}
   - component: {fileID: 5422689765159620013}
   - component: {fileID: 7316849933098622430}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 7625706423316050317}
   - component: {fileID: 5722186041460137305}
   - component: {fileID: 4639121729290004195}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

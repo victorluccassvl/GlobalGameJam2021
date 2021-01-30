@@ -1,16 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
+    private Camera _camera = null;
+
     [SerializeField]
     private Transform _objectToFollow = null;
     [SerializeField]
     private float _heightOffset = 3f;
-
-
-    private Camera _camera = null;
 
     private void Awake()
     {
