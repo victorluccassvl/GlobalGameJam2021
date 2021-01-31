@@ -43,6 +43,7 @@ public class WallJump : MonoBehaviour
         direction.Normalize();
 
         _player.PlayPlayerSound(PlaySound.Audios.WallJump);
+        _player.Animator.SetTrigger("Wall Jump");
         _player.Rigidbody.AddForce(direction * _speed, ForceMode.VelocityChange);
         _wallJumpElapsedDelay = 0f;
     }
