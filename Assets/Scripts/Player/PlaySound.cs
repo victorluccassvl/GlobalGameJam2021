@@ -7,9 +7,10 @@ public class PlaySound : MonoBehaviour
         OpenDoor = 0,
         Walking,
         Die,
-        Jump,
+        PickSoul,
+        
         WallJump,
-        PickSoul
+        Jump
     }
 
     [SerializeField]

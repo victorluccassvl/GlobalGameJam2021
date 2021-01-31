@@ -42,7 +42,9 @@ public class Move : MonoBehaviour
 
     private void PerformMovement(float movementDirection)
     {
-        _player.Rigidbody.AddForce(Vector3.right * movementDirection * _speed, ForceMode.VelocityChange);
+        if(!_player.getIsDead()){
+            _player.Rigidbody.AddForce(Vector3.right * movementDirection * _speed, ForceMode.VelocityChange);
+        }
     }
 
     private void DampSpeed()

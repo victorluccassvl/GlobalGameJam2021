@@ -7,6 +7,15 @@ public class Player : MonoBehaviour
     private Animator _animator = null;
     private PlaySound _soundPlayer = null;
     private Rigidbody _rigidbody = null;
+    private bool isDead = false;
+
+    public bool getIsDead(){
+        return isDead;
+    }
+
+    public void setIsDead(bool isDeadN){
+        isDead = isDeadN;
+    }
 
     public Rigidbody Rigidbody
     {
@@ -51,6 +60,8 @@ public class Player : MonoBehaviour
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
+
+        isDead = false;
 
         _groundDetector = GetComponentInChildren<GroundDetector>();
         Debug.Assert(_groundDetector != null, "The player could not find it's ground detector");

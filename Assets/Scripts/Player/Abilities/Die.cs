@@ -1,20 +1,35 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 
 [RequireComponent(typeof(Player))]
 public class Die : MonoBehaviour
 {
-    // private Player _player = null;
+    private Player _player = null;
 
-    // [SerializeField]
-    // private Transform _spawn = null;
+    public static bool isDead = false;
+
+    private void Awake(){
+        isDead = false;
+    }
 
     public void ToDie()
     {
-        // _player = GetComponent<Player>(); // old telepor plpayer when dies
-        // _player.PlayPlayerSound(PlaySound.Audios.Die);
-        // _player.transform.position = _spawn.position;
+        _player = GetComponent<Player>();
+        
+        if(!isDead){
+            _player.PlayPlayerSound(PlaySound.Audios.Die);
+            _player.setIsDead(true);
+        }
+        isDead = true;
+        
+        
+        StartCoroutine(PlaySource());
+    }
+
+    private IEnumerator PlaySource(){
+        yield return new WaitForSeconds(3f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
