@@ -11,9 +11,6 @@ public class LevelSound : MonoBehaviour
         Debug.Assert(_source != null, "The sound player could not find it's audio source");
         StartCoroutine(PlaySource(_source));
     }
-    private void Awake()
-    {
-    }
 
     private IEnumerator PlaySource(AudioSource _source){
         yield return new WaitForSeconds(10.3f);

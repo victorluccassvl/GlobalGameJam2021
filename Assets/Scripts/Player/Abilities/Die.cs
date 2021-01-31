@@ -21,6 +21,7 @@ public class Die : MonoBehaviour
         if(!isDead){
             _player.PlayPlayerSound(PlaySound.Audios.Die);
             _player.setIsDead(true);
+            _player.Animator.SetBool("Died", true);
         }
         isDead = true;
         
