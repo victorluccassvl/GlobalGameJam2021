@@ -16,7 +16,7 @@ public class OpenDoor : MonoBehaviour
             if (_pickedSoul.HasSoul)
             {
                 _opened = true;
-                _pickedSoul.enabled = false;
+                _pickedSoul.DeliverSoul();
                 print("A porta abriu");
             }
         }
