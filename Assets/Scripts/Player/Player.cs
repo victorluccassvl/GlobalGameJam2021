@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -50,6 +49,9 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
+
         _groundDetector = GetComponentInChildren<GroundDetector>();
         Debug.Assert(_groundDetector != null, "The player could not find it's ground detector");
 
@@ -68,6 +70,9 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (Application.targetFrameRate != 60)
+            Application.targetFrameRate = 60;
+
         Animator.SetFloat("SidewaysSpeed", Mathf.Abs(Rigidbody.velocity.x));
     }
 

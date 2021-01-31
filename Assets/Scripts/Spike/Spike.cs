@@ -10,7 +10,6 @@ public class Spike : MonoBehaviour
         {
             _die = other.GetComponent<Die>();
             Debug.Assert(_die != null, "The player does not have a die component");
-            print("SPIKE!");
             _die.ToDie();
         }
     }

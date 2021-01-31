@@ -5,14 +5,14 @@ public class OpenDoor : MonoBehaviour
     private PickSoul _pickedSoul = null; // reference to soul
     private Player _player = null;
 
+    private const float DOOR_COOLDOWN = 2f;
+
+    private static float _doorElapsedCooldown = 0f;
+
     [SerializeField]
     private bool _opened = false;
-
     [SerializeField]
-    private float _xTeleport = -21f;
-    [SerializeField]
-    private float _yTeleport = 1f;
-
+    private Transform _portFront = null;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -21,31 +21,33 @@ public class OpenDoor : MonoBehaviour
             _player = other.GetComponent<Player>();
             _pickedSoul = other.GetComponent<PickSoul>();
             Debug.Assert(_pickedSoul != null, "The player does not have a soul picker");
-            if (_pickedSoul.HasSoul)
+            if (_pickedSoul.HasSoul && !_opened)
             {
                 _opened = true;
                 _pickedSoul.DeliverSoul();
-                print("A porta abriu");
             }
         }
     }
 
-    private void OnTriggerExit(Collider other){
+    private void OnTriggerExit(Collider other)
+    {
         if (other.tag == "Player")
         {
             _player = null;
         }
     }
 
-    private void Awake(){
-    }
 
     private void Update()
     {
         float enterDoor = Input.GetAxis("EnterDoor");
 
-        if(enterDoor > 0f && _opened && _player != null){
-            _player.transform.position = new Vector3(_xTeleport,_yTeleport,0f);
+        _doorElapsedCooldown += Time.deltaTime;
+
+        if(enterDoor > 0f && _opened && _player != null && _doorElapsedCooldown > DOOR_COOLDOWN)
+        {
+            _doorElapsedCooldown = 0f;
+            _player.transform.position = _portFront.position;
         }
     }
 }
