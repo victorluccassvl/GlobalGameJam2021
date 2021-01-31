@@ -13,6 +13,16 @@ public class OpenDoor : MonoBehaviour
     private bool _opened = false;
     [SerializeField]
     private Transform _portFront = null;
+    [SerializeField]
+    private GameObject _openDoor = null;
+    [SerializeField]
+    private GameObject _closedDoor = null;
+
+    private void OnEnable()
+    {
+        _openDoor.SetActive(_opened);
+        _closedDoor.SetActive(!_opened);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,6 +34,8 @@ public class OpenDoor : MonoBehaviour
             if (_pickedSoul.HasSoul && !_opened)
             {
                 _opened = true;
+                _openDoor.SetActive(_opened);
+                _closedDoor.SetActive(!_opened);
                 _pickedSoul.DeliverSoul();
             }
         }
@@ -36,7 +48,6 @@ public class OpenDoor : MonoBehaviour
             _player = null;
         }
     }
-
 
     private void Update()
     {
