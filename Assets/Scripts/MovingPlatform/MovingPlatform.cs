@@ -46,6 +46,16 @@ public class MovingPlatform : MonoBehaviour
 
     }
 
+    private void OnCollisionEnter(Collision other){
+        other.collider.transform.SetParent(transform);
+        print("ENTER!");
+    }
+
+    private void OnCollisionExit(Collision other){
+        other.collider.transform.SetParent(null);
+        print("EXIT!");
+    }
+
     // private void FixedUpdate()
     // {
     //     DampSpeed();
