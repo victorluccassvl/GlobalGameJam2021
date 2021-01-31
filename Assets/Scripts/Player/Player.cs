@@ -1,22 +1,32 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     private GroundDetector _groundDetector = null;
     private WallDetector _wallDetector = null;
     private Animator _animator = null;
-
-    [SerializeField]
+    private PlaySound _soundPlayer = null;
     private Rigidbody _rigidbody = null;
 
     public Rigidbody Rigidbody
     {
         get
         {
-            Debug.Assert(_rigidbody != null, "Rigidbody nulo no player");
+            Debug.Assert(_rigidbody != null, "The player could not find it's rigidbody");
             return _rigidbody;
         }
     }
+
+    public Animator Animator
+    {
+        get
+        {
+            Debug.Assert(_animator != null, "The player could not find it's animator");
+            return _animator;
+        }
+    }
+
 
     public bool IsPlayerOnTheGround
     {
@@ -46,12 +56,23 @@ public class Player : MonoBehaviour
         _wallDetector = GetComponentInChildren<WallDetector>();
         Debug.Assert(_wallDetector != null, "The player could not find it's wall detector");
 
-        _animator = GetComponent<Animator>();
+        _rigidbody = GetComponent<Rigidbody>();
+        Debug.Assert(_rigidbody != null, "The player could not find it's rigidbody");
+
+        _animator = GetComponentInChildren<Animator>();
         Debug.Assert(_animator != null, "The player could not find it's animator");
+
+        _soundPlayer = GetComponent<PlaySound>();
+        Debug.Assert(_soundPlayer != null, "The player could not find it's sound player");
     }
 
     private void Update()
     {
-        _animator.SetFloat("SidewaysSpeed", _rigidbody.velocity.x);
+        Animator.SetFloat("SidewaysSpeed", Mathf.Abs(Rigidbody.velocity.x));
+    }
+
+    public void PlayPlayerSound(PlaySound.Audios audio)
+    {
+        _soundPlayer.PlaySpecificSound(audio);
     }
 }

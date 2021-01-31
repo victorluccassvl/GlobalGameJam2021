@@ -27,6 +27,8 @@ public class Jump : MonoBehaviour
 
     private void PerformJump()
     {
+        _player.PlayPlayerSound(PlaySound.Audios.Jump);
+        _player.Animator.SetTrigger("Jump");
         _player.Rigidbody.AddForce(Vector3.up * _speed, ForceMode.VelocityChange);
         _jumpElapsedDelay = 0f;
     }

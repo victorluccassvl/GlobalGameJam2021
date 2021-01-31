@@ -7,6 +7,7 @@ public class Move : MonoBehaviour
 
     [SerializeField]
     private float _speed = 3f;
+    private bool _isMovingToRight = true;
 
     private void Awake()
     {
@@ -19,7 +20,18 @@ public class Move : MonoBehaviour
 
         if (_player.IsPlayerTouchingWall && !_player.IsPlayerOnTheGround)
             movementDirection = 0f;
-    
+
+        if (movementDirection > 0f && !_isMovingToRight)
+        {
+            _isMovingToRight = true;
+            _player.transform.Rotate(Vector3.up, 180f);
+        }
+        else if (movementDirection < 0f && _isMovingToRight)
+        {
+            _isMovingToRight = false;
+            _player.transform.Rotate(Vector3.up, 180f);
+        }
+
         PerformMovement(movementDirection);
     }
 
